@@ -21,7 +21,7 @@ Developed with Node 12 on Ubuntu 18.04 LTS. Other versions may work.
 
 ## Installation
 
-Download a copy for development and install its dependencies
+Download a copy of the repo and install its dependencies
 ```bash
 git clone https://github.com/botandrose/activity_sns_filter
 cd activity_sns_filter
