@@ -13,11 +13,12 @@ let app = {
     this.password = password;
     this.forwardUrl = forwardUrl;
 
-    if(this.username && this.password) {
-      this.express.use(expressBasicAuth({
-        users: { [this.username]: this.password },
-      }));
-    }
+    // FIXME currently rejects requests coming from SNS
+    // if(this.username && this.password) {
+    //   this.express.use(expressBasicAuth({
+    //     users: { [this.username]: this.password },
+    //   }));
+    // }
 
     this.express.post(path, (req, res) => {
       const body = JSON.parse(req.body);
