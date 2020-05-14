@@ -63,4 +63,5 @@ There are also four optional environment variables for further configuration:
   ```
 * Feature: Multi-tenant service instead of a one-off deployment per downstream subscriber app
 
-  Generalize further into a multi-tenant SNS filtering microservice, backed by e.g. Redis sets for persistence, with HTTP REST APIs for registering a new filter and periodically updating it with the latest user id whitelist.
+* Feature: Generalize further into a multi-tenant SNS filtering microservice, backed by e.g. Redis sets for persistence, with HTTP REST APIs for registering a new filter and periodically updating it with the latest user id whitelist.
+* Feature: Generalize even further by allowing clients to specify arbitrary filtering logic, not just user id set inclusion. Maybe by using something akin to PostgreSQL's JSON query language, or MongoDB's, etc.
