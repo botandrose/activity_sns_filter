@@ -50,8 +50,8 @@ There are also four optional environment variables for further configuration:
 
 ### TODO
 * Bugfix: HTTP Basic auth from SNS to microservice is broken, so it is temporarily disabled. Maybe something specific to the `express-basic-auth` package? It worked fine with Rails' basic auth implementation.
-* Chore: Set up error handling and notification
-* Chore: Set up some decent logging
+* Feature: Set up error handling and notification
+* Feature: Set up some decent logging
 * Chore: Implement pending tests for HTTP Basic Auth
 * Chore: Implement pending tests for the periodic refreshing of the user id whitelist
 * Chore: Could probably benefit from some refactoring, since its my first node app
