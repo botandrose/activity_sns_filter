@@ -1,7 +1,7 @@
 const express = require('express');
 const expressBasicAuth = require('express-basic-auth');
 const bodyParser = require('body-parser');
-require('node-fetch'); // must be global otherwise won't be caught by fetch-mock in test
+global.fetch = require('node-fetch'); // must be global otherwise won't be caught by fetch-mock in test
 
 let app = {
   express: express().use(bodyParser.text()),
