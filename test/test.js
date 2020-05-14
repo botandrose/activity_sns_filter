@@ -9,15 +9,9 @@ chai.should();
 
 let forwardUrl = "https://example.com/messages";
 
-beforeEach(async () => {
+beforeEach(() => {
   fetchMock.get(forwardUrl, ["1","2","3"]);
   fetchMock.post(forwardUrl, 201);
-
-  await app.boot({
-    path: "/",
-    forward_url: forwardUrl,
-    refresh_frequency: 60000,
-  });
 })
 
 afterEach(() => fetchMock.reset());
@@ -33,48 +27,65 @@ function buildRequest() {
 }
 
 describe("app", () => {
-  describe("POST /", () => {
-    describe("when SNS message is for a userId in the list", () => {
-      let request = () => buildRequest().send(buildMessageForUserId("1"));
+  describe("with minimal config", () => {
+    beforeEach(async () => {
+      await app.boot({
+        path: "/",
+        forward_url: forwardUrl,
+        refresh_frequency: 60000,
+      });
+    })
 
-      it("returns 201", (done) => {
-        request().end((err, res) => {
-          res.should.have.status(201);
-          done();
+    describe("POST /", () => {
+      describe("when SNS message is for a userId in the list", () => {
+        let request = () => buildRequest().send(buildMessageForUserId("1"));
+
+        it("returns 201", (done) => {
+          request().end((err, res) => {
+            res.should.have.status(201);
+            done();
+          });
+        });
+
+        it("forwards SNS message to the app", (done) => {
+          request().end((err, res) => {
+            fetchMock.called(forwardUrl, {
+               method: 'POST',
+               body: JSON.parse(buildMessageForUserId("1")),
+               headers: { 'Content-Type': 'application/json' },
+            }).should.be.true;
+            done();
+          });
         });
       });
 
-      it("forwards SNS message to the app", (done) => {
-        request().end((err, res) => {
-          fetchMock.called(forwardUrl, {
-             method: 'POST',
-             body: JSON.parse(buildMessageForUserId("1")),
-             headers: { 'Content-Type': 'application/json' },
-          }).should.be.true;
-          done();
+      describe("when SNS message is NOT for a userId in the list", () => {
+        let request = () => buildRequest().send(buildMessageForUserId("0"));
+
+        it("returns 204", (done) => {
+          request().end((err, res) => {
+            res.should.have.status(204);
+            done();
+          });
         });
-      });
-    });
 
-    describe("when SNS message is NOT for a userId in the list", () => {
-      let request = () => buildRequest().send(buildMessageForUserId("0"));
-
-      it("returns 204", (done) => {
-        request().end((err, res) => {
-          res.should.have.status(204);
-          done();
-        });
-      });
-
-      it("forwards SNS message to the app", (done) => {
-        request().end((err, res) => {
-          fetchMock.called(forwardUrl, {
-             method: 'POST',
-          }).should.be.false;
-          done();
+        it("forwards SNS message to the app", (done) => {
+          request().end((err, res) => {
+            fetchMock.called(forwardUrl, {
+               method: 'POST',
+            }).should.be.false;
+            done();
+          });
         });
       });
     });
   });
+
+  describe("with http basic auth enabled", () => {
+    it("uses http basic auth for itself");
+    it("uses http basic auth for its requests");
+  });
+
+  it("periodically refreshes userIds from forwardUrl");
 });
 
