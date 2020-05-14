@@ -6,6 +6,10 @@ const USERNAME = process.env.USERNAME;
 const PASSWORD = process.env.PASSWORD;
 const FORWARD_URL = process.env.FORWARD_URL;
 
+if(!FORWARD_URL) {
+  throw new Error('Must specify a FORWARD_URL environment variable!')
+}
+
 app.boot({
   username: USERNAME,
   password: PASSWORD,
