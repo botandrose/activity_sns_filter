@@ -58,4 +58,4 @@ There are also four optional environment variables for further configuration:
   ```
 * Feature: Multi-tenant service instead of a one-off deployment per subscriber
 
-  Generalize further into a multi-tenant SNS filtering microservice, backed by redis sets for persistence, with HTTP REST API for registering a new filte,r and periodically updating it with the latest user id whitelist.
+  Generalize further into a multi-tenant SNS filtering microservice, backed by Redis sets for persistence, with HTTP REST APIs for registering a new filter and periodically updating it with the latest user id whitelist.
