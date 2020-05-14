@@ -4,5 +4,19 @@
     "express": "^4.17.1",
     "express-basic-auth": "^1.2.0",
     "node-fetch": "^2.6.0"
-  }
+  },
+  "name": "activity_sns_filter",
+  "version": "0.1.0",
+  "description": "HTTP microservice to filter Activity SNS messages by userId",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/botandrose/activity_sns_filter.git"
+  },
+  "author": "micah@botandrose.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/botandrose/activity_sns_filter/issues"
+  },
+  "homepage": "https://github.com/botandrose/activity_sns_filter#readme"
 }
