@@ -11,7 +11,7 @@ app.boot({
   password: PASSWORD,
   path: PATH,
   port: PORT,
-  forward_url: FORWARD_URL,
-  refresh_frequency: 60000,
+  forwardUrl: FORWARD_URL,
+  refreshFrequency: 60000,
 });
 

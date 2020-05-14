@@ -8,10 +8,10 @@ let app = {
 
   userIds: new Set(),
 
-  boot: function({ username, password, path, port, forward_url, refresh_frequency }) {
+  boot: function({ username, password, path, port, forwardUrl, refreshFrequency }) {
     this.username = username;
     this.password = password;
-    this.forward_url = forward_url;
+    this.forwardUrl = forwardUrl;
 
     if(this.username && this.password) {
       this.express.use(expressBasicAuth({
@@ -28,12 +28,12 @@ let app = {
       }
     });
 
-    setInterval(() => this.refreshUserIds(), refresh_frequency);
+    setInterval(() => this.refreshUserIds(), refreshFrequency);
     return this.refreshUserIds().then(() => this.express.listen(port));
   },
 
   refreshUserIds: function() {
-    return fetch(this.forward_url, { headers: this.authHeaders() })
+    return fetch(this.forwardUrl, { headers: this.authHeaders() })
       .then(res => res.json())
       .then(data => {
         console.log(`Fetched ${data.length} user ids`);
@@ -47,7 +47,7 @@ let app = {
     const found = this.userIds.has(userId);
     if(found) {
       console.log(`Forwarding message for: ${userId}`);
-      fetch(this.forward_url, {
+      fetch(this.forwardUrl, {
         method: 'POST',
         body: JSON.stringify(body),
         headers: Object.assign(

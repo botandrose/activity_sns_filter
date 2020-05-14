@@ -31,8 +31,8 @@ describe("app", () => {
     beforeEach(async () => {
       await app.boot({
         path: "/",
-        forward_url: forwardUrl,
-        refresh_frequency: 60000,
+        forwardUrl: forwardUrl,
+        refreshFrequency: 60000,
       });
     })
 
