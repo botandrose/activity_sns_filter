@@ -23,6 +23,7 @@
     "mocha": "^7.1.2"
   },
   "scripts": {
+    "start": "node index.js",
     "test": "mocha --require @babel/register test/*.js --exit"
   },
   "repository": {
