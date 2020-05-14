@@ -1,4 +1,7 @@
 # activity_sns_filter
+
+[![Build Status](https://travis-ci.org/botandrose/activity_sns_filter.svg)](https://travis-ci.org/botandrose/activity_sns_filter)
+
 Node.js HTTP microservice proxy to filter Activity SNS messages by user id
 
 ## Background
